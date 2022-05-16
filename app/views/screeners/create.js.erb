@@ -1,0 +1,4 @@
+$(".flashMessages").html("<%= j render 'shared/flash_messages' %>");
+<% if @message %>
+  $("#screenerSection").html("<%= @message.html_safe %>");
+<% end %>

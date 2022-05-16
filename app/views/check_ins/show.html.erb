@@ -1,7 +1,11 @@
-<p>Please complete all of the steps on this page:</p>
+<h2>Please complete all of the steps on this page:</h2>
 <p>
-  <%= link_to 'Start PHQ screener', new_check_in_screener_path(@check_in) %>
+  <%= link_to "Start PHQ screener", new_check_in_screener_path(@check_in), id: "startPHQScreener", remote: true %>
 </p>
+
+<div class="flashMessages"></div>
+<div id="screenerSection"></div>
+
 <%= form_for(:check_in, url: check_in_path, method: :put, id: 1) do |f| %>
   <%= f.submit "Complete check in" %>
 <% end %>
