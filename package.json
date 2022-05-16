@@ -2,9 +2,13 @@
   "name": "interview",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "5.4.3"
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "5.4.3",
+    "jquery": "^3.6.0",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^4.9.0"
+    "@webpack-cli/serve": "^1.6.1",
+    "webpack-dev-server": "~3"
   }
 }
