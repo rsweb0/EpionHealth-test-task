@@ -1,0 +1,9 @@
+<% if @screener.high_scored? %>
+  <p>Additional screening should be completed.</p>
+<% else %>
+  <p>Additional screening is not needed.</p>
+<% end %>
+
+<p>
+  <%= link_to "Start PHQ screener", new_check_in_screener_path(@check_in) %>
+</p>

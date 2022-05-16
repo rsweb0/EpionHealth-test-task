@@ -1,6 +1,16 @@
 <p>
   Over the past 2 weeks, how often have you been bothered by any of the following problems?
 </p>
+
 <%= form_for @screener, url: check_in_screeners_path(@check_in) do |f| %>
+  <%= f.fields_for :responses do |response_fields| %>
+    <div>
+      <% question = Screener::QUESTIONS[response_fields.index] %>
+      <p><%= response_fields.index + 1 %>. <%= question %></p>
+      <%= response_fields.hidden_field :question, value: question %>
+      <%= response_fields.collection_radio_buttons(:answer, Screener::ANSWER_OPTIONS, :first, :last, { required: true }) %>
+    </div>
+  <% end %>
+  <br>
   <%= f.submit "Submit" %>
 <% end %>
