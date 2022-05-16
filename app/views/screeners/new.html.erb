@@ -1,0 +1,6 @@
+<p>
+  Over the past 2 weeks, how often have you been bothered by any of the following problems?
+</p>
+<%= form_for @screener, url: check_in_screeners_path(@check_in) do |f| %>
+  <%= f.submit "Submit" %>
+<% end %>
