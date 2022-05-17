@@ -7,11 +7,12 @@ class ScreenersController < ApplicationController
 
   def new
     @screener = @check_in.screeners.new
-    2.times { @screener.responses.new }
+    Screener::QUESTIONS.size.times { @screener.responses.new }
   end
 
   def create
     @screener = @check_in.screeners.new(screen_params)
+
     if @screener.save
       flash[:notice] = "Your response has been recorded successfully."
       redirect_to check_in_screener_path(check_in_id: @check_in.id, id: @screener.id)

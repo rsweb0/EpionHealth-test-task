@@ -4,7 +4,7 @@
 
 <%= form_for @screener, url: check_in_screeners_path(@check_in) do |f| %>
   <%= f.fields_for :responses do |response_fields| %>
-    <div>
+    <div id="screenerQuestion<%= response_fields.index + 1 %>">
       <% question = Screener::QUESTIONS[response_fields.index] %>
       <p><%= response_fields.index + 1 %>. <%= question %></p>
       <%= response_fields.hidden_field :question, value: question %>
