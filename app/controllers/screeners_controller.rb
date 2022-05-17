@@ -3,7 +3,7 @@ class ScreenersController < ApplicationController
 
   def new
     @screener = @check_in.screeners.new
-    @screener.responses.new
+    Screener::QUESTIONS.size.times { @screener.responses.new }
   end
 
   def create
@@ -12,7 +12,7 @@ class ScreenersController < ApplicationController
       flash[:notice] = "Your response has been recorded successfully."
       set_message
     else
-      flash[:error] = @screener.errors.full_messages.to_sentence
+      flash[:error] = @screener.errors.full_messages.uniq.to_sentence
     end
   end
 

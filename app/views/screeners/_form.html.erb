@@ -3,14 +3,13 @@
 </p>
 <p>
   <%= form_for @screener, url: check_in_screeners_path(@check_in), remote: true do |f| %>
-    <% Screener::QUESTIONS.each_with_index do |question, index| %>
-      <%= f.fields_for :responses do |response_fields| %>
-        <div>
-          <p><%= index + 1 %>. <%= question %></p>
-          <%= response_fields.hidden_field :question, value: question %>
-          <%= response_fields.collection_radio_buttons(:answer, Screener::ANSWER_OPTIONS, :first, :last) %>
-        </div>
-      <% end %>
+    <%= f.fields_for :responses do |response_fields| %>
+      <div id="screenerQuestion<%= response_fields.index + 1 %>">
+        <% question = Screener::QUESTIONS[response_fields.index] %>
+        <p><%= response_fields.index + 1 %>. <%= question %></p>
+        <%= response_fields.hidden_field :question, value: question %>
+        <%= response_fields.collection_radio_buttons(:answer, Screener::ANSWER_OPTIONS, :first, :last, { required: true }) %>
+      </div>
     <% end %>
     <br>
     <%= f.submit "Submit" %>

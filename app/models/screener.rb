@@ -15,9 +15,22 @@ class Screener < ApplicationRecord
   ]
 
   belongs_to :check_in
-  has_many :responses
+  has_many :responses, dependent: :destroy
 
   accepts_nested_attributes_for :responses
+
+  # This logic is added to show more user friendly error messages
+  validate do |screener|
+    if screener.responses.present?
+      screener.errors.clear
+      screener.responses.each do |response|
+        next if response.valid?
+        response.errors.full_messages.each do |message|
+          errors.add(:base, message)
+        end
+      end
+    end
+  end
 
   def high_scored?
     responses.high_scored.present?
