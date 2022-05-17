@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "A patient checks into the app" do
+RSpec.feature "A patient checks into the app", js: true do
   scenario "for a scheduled appointment" do
     visit root_path
 
