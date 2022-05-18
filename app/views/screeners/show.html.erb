@@ -1,9 +1,8 @@
-<% if @screener.high_scored? %>
-  <p>Additional screening should be completed.</p>
-<% else %>
-  <p>Additional screening is not needed.</p>
-<% end %>
+<p><b><%= @message %></b></p>
 
+<% if @next_screener %>
+  <%= render partial: "form", locals: { screener: @next_screener } %>
+<% end %>
 <p>
-  <%= link_to "Start PHQ screener", new_check_in_screener_path(@check_in) %>
+  <%= link_to "Back", check_in_path(@check_in) %>
 </p>
