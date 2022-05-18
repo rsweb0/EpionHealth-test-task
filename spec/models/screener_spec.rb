@@ -22,4 +22,18 @@ RSpec.describe Screener, type: :model do
       expect(screener.high_scored?).to be_falsey
     end
   end
+
+  describe "last_phq?" do
+    let(:screener) { create(:screener, phq_level: 2) }
+
+    it "returns false if screener is not the last level PHQ" do
+      expect(screener.last_phq?).to be_falsey
+    end
+
+    it "returns true if screener is the last level PHQ" do
+      screener.update(phq_level: Screener::QUESTIONS.keys.max)
+
+      expect(screener.last_phq?).to be_truthy
+    end
+  end
 end
