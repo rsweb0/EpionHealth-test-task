@@ -14,7 +14,7 @@ RSpec.feature "A patient checks into the app" do
 
     expect(page).to have_content("Over the past 2 weeks, how often have you been bothered by any of the following problems?")
 
-    Screener::QUESTIONS.each do |question|
+    Screener::QUESTIONS[1].each do |question|
       expect(page).to have_content(question)
     end
   end
@@ -24,7 +24,7 @@ RSpec.feature "A patient checks into the app" do
 
     click_on "Start PHQ screener"
 
-    click_on("Submit")
+    click_on("Complete check in")
 
     expect(page).to have_content("You need to answer each question.")
   end
@@ -38,7 +38,7 @@ RSpec.feature "A patient checks into the app" do
       choose("Not at all")
     end
 
-    click_on("Submit")
+    click_on("Complete check in")
 
     expect(page).to have_content("You need to answer each question.")
   end
@@ -55,10 +55,14 @@ RSpec.feature "A patient checks into the app" do
       choose("Not at all")
     end
 
-    click_on("Submit")
+    click_on("Complete check in")
 
     expect(page).to have_content("Your response has been recorded successfully.")
     expect(page).to have_content("Additional screening should be completed.")
+
+    Screener::QUESTIONS[2].each do |question|
+      expect(page).to have_content(question)
+    end
   end
 
   scenario "with all answers choosen and not high scored" do
@@ -73,7 +77,7 @@ RSpec.feature "A patient checks into the app" do
       choose("Not at all")
     end
 
-    click_on("Submit")
+    click_on("Complete check in")
 
     expect(page).to have_content("Your response has been recorded successfully.")
     expect(page).to have_content("Additional screening is not needed.")
