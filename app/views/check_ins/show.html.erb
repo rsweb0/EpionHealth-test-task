@@ -1,12 +1,19 @@
 <h2>Please complete all of the steps on this page:</h2>
-<p>
-  <%= link_to "Start PHQ screener", new_check_in_screener_path(@check_in), id: "startPHQScreener", remote: true %>
-</p>
+
+<div id="startScreenerLink">
+  <%= render 'screener_links' %>
+</div>
 
 <div class="flashMessages"></div>
-<div id="screenerSection"></div>
-<br>
 
-<%= form_for(:check_in, url: check_in_path, method: :put, id: 1) do |f| %>
-  <%= f.submit "Complete check in" %>
-<% end %>
+<div id="screenerSection">
+  <% if @check_in.screeners.present? %>
+    <% if @check_in.completed? %>
+      <p><b>"Check in is completed!!!"</b></p>
+    <% else %>
+      <p><b>Additional screening should be completed.</b></p>
+
+      <%= render partial: 'screeners/form', locals: { screener: @screener } %>
+    <% end %>
+  <% end %>
+</div>

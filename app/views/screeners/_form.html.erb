@@ -2,16 +2,21 @@
   Over the past 2 weeks, how often have you been bothered by any of the following problems?
 </p>
 <p>
-  <%= form_for @screener, url: check_in_screeners_path(@check_in), remote: true do |f| %>
-    <%= f.fields_for :responses do |response_fields| %>
+  <%= form_for screener, url: [@check_in, screener], remote: true do |f| %>
+    <%= f.fields_for :responses, screener.responses do |response_fields| %>
       <div id="screenerQuestion<%= response_fields.index + 1 %>">
-        <% question = Screener::QUESTIONS[response_fields.index] %>
+        <% question = Screener::QUESTIONS[screener.phq_level][response_fields.index] %>
+
         <p><%= response_fields.index + 1 %>. <%= question %></p>
         <%= response_fields.hidden_field :question, value: question %>
+
         <%= response_fields.collection_radio_buttons(:answer, Screener::ANSWER_OPTIONS, :first, :last, { required: true }) %>
+
       </div>
     <% end %>
+
+    <%= f.hidden_field :phq_level, value: screener.phq_level %>
     <br>
-    <%= f.submit "Submit" %>
+    <%= f.submit "Complete check in" %>
   <% end %>
 </p>
