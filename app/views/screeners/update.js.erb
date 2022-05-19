@@ -1,0 +1,9 @@
+$(".flashMessages").html("<%= j render 'shared/flash_messages' %>");
+<% if @message %>
+  $('#startScreenerLink').html("<%= j render 'check_ins/screener_links' %>");
+  $("#screenerSection").html("<b><%= @message.html_safe %></b>");
+
+  <% if @next_screener %>
+    $("#screenerSection").append("<%= j render partial: 'form', locals: { screener: @next_screener } %>");
+  <% end %>
+<% end %>

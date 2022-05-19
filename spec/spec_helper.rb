@@ -26,4 +26,6 @@ RSpec.configure do |config|
   config.order = :random
 end
 
-WebMock.disable_net_connect!(allow_localhost: true)
+# Note: Feature specs are failing without this. Tried to upgrade webdrivers version
+# but the issue still persists
+WebMock.allow_net_connect!(allow_localhost: true)

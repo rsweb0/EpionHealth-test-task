@@ -1,0 +1,9 @@
+<p>
+  <% if @check_in.screeners.present? %>
+    <% @check_in.screeners_by_phq_level.each do |screener| %>
+      <p><%= link_to "Restart PHQ #{screener.phq_level}", edit_check_in_screener_path(check_in_id: @check_in.id, id: screener.id), id: "startPHQScreener", remote: true %></span></p>
+    <% end %>
+  <% else %>
+    <%= link_to "Start PHQ screener", new_check_in_screener_path(@check_in), id: "startPHQScreener", remote: true %>
+  <% end %>
+</p>
