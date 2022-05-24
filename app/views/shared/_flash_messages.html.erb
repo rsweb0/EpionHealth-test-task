@@ -1,0 +1,6 @@
+<% flash.each do |type, message| %>
+  <p class="<%= type %>">
+    <%= sanitize message %>
+  </p>
+<% end %>
+<% flash.discard %>

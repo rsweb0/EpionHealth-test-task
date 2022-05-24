@@ -1,7 +1,14 @@
 <p>Please complete all of the steps on this page:</p>
-<ul>
-  <li>Start PHQ screener</li>
-</ul>
-<%= form_for(:check_in, url: check_in_path, method: :put, id: 1) do |f| %>
-  <%= f.submit "Complete check in" %>
+<p>
+  <%= render partial: 'screener_links' %>
+</p>
+
+<% if @check_in.screeners.present? %>
+  <% if @check_in.completed? %>
+    <p><b>"Check in is completed!!!"</b></p>
+  <% else %>
+    <p><b>Additional screening should be completed.</b></p>
+
+    <%= render partial: 'screeners/form', locals: { screener: @screener } %>
+  <% end %>
 <% end %>

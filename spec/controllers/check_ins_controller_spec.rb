@@ -52,6 +52,16 @@ RSpec.describe CheckInsController, type: :controller do
       expect(response).to render_template(:show)
       expect(response).to render_with_layout(:application)
     end
+
+    it "initializes a new screener if the check_in is not completed" do
+      check_in = create(:check_in, id: 1)
+      create(:screener, check_in: check_in)
+      allow_any_instance_of(CheckIn).to receive(:completed?).and_return(false)
+
+      get :show, params: { id: 1 }
+
+      expect(assigns[:screener]).to be_new_record
+    end
   end
 
   describe "PUT #update" do

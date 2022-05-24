@@ -1,0 +1,8 @@
+<p><b><%= @message %></b></p>
+
+<% if @next_screener %>
+  <%= render partial: "form", locals: { screener: @next_screener } %>
+<% end %>
+<p>
+  <%= link_to "Back", check_in_path(@check_in) %>
+</p>
